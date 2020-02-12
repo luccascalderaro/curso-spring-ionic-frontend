@@ -1,3 +1,4 @@
+import { ClienteService } from './../services/domain/cliente.service';
 import { BrowserModule } from '@angular/platform-browser';
 import { ErrorHandler, NgModule } from '@angular/core';
 import {HttpClientModule } from '@angular/common/http';
@@ -30,7 +31,7 @@ import { StorageService } from '../services/storage.service';
     SplashScreen,
     {provide: ErrorHandler, useClass: IonicErrorHandler},
     CategoriaService,ErrorInterceptorProvider,AuthService,
-    StorageService
+    StorageService, ClienteService
   ]
 })
 export class AppModule {}
