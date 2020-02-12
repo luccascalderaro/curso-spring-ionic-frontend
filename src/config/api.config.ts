@@ -3,3 +3,5 @@ export const API_CONFIG = {
     bucketBaseUrl: "https://lcap0.s3-sa-east-1.amazonaws.com/"
 
 }
+
+
