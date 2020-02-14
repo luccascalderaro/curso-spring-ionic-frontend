@@ -24,6 +24,19 @@ constructor(public http: HttpClient, public storage: StorageService){
                  responseType: 'text'
              } );
     }
+
+    refreshToken(){
+        return  this.http.post(
+              `${API_CONFIG.baseUrl}/auth/refresh_token`,
+               {},
+               {
+                   observe: 'response',
+                   responseType: 'text'
+               } );
+      }
+
+
+
     successfulLogin(authorizationValue : string){
         let tok = authorizationValue.substring(7);
         let user : LocalUser = {
@@ -36,5 +49,8 @@ constructor(public http: HttpClient, public storage: StorageService){
     logout(){
         this.storage.setLocalUser(null);
     }
+
+
+    
 
 }
