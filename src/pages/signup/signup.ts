@@ -66,7 +66,7 @@ export class SignupPage {
   }
 
   signupUser() {
-    console.log("enviou o form")
+    console.log(this.formGroup.value)
   }
   
 
