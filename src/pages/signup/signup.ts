@@ -1,9 +1,10 @@
+import { ClienteService } from './../../services/domain/cliente.service';
 import { CidadeDTO } from './../../models/cidade.dto';
 import { EstadoDTO } from './../../models/estado.dto';
 import { EstadoService } from './../../services/domain/estado.service';
 import { CidadeService } from './../../services/domain/cidade.service';
 import { Component } from '@angular/core';
-import { IonicPage, NavController, NavParams } from 'ionic-angular';
+import { IonicPage, NavController, NavParams, AlertController } from 'ionic-angular';
 import { FormGroup, FormBuilder, Validators } from '@angular/forms';
 
 
@@ -22,7 +23,9 @@ export class SignupPage {
     public navParams: NavParams,
     public formBuilder: FormBuilder,
     public cidadeService: CidadeService,
-    public estadoService: EstadoService) {
+    public estadoService: EstadoService,
+    public clienteService: ClienteService,
+    public alertCtrl: AlertController) {
 
     this.formGroup = this.formBuilder.group({
       nome: ['Luccas', [Validators.required, Validators.minLength(5), Validators.maxLength(120)]],
@@ -43,18 +46,18 @@ export class SignupPage {
     });
   }
 
-  ionViewDidLoad(){
-   this.estadoService.findAll()
-    .subscribe(response => {
-      this.estados = response;
-      this.formGroup.controls.estadoId.setValue(this.estados[0].id);
-      this.updateCidades();
-    },
-    error => {});
+  ionViewDidLoad() {
+    this.estadoService.findAll()
+      .subscribe(response => {
+        this.estados = response;
+        this.formGroup.controls.estadoId.setValue(this.estados[0].id);
+        this.updateCidades();
+      },
+        error => { });
   }
 
 
-  updateCidades(){
+  updateCidades() {
     let estado_id = this.formGroup.value.estadoId;
     this.cidadeService.findAll(estado_id)
       .subscribe(response => {
@@ -62,12 +65,36 @@ export class SignupPage {
         this.formGroup.controls.cidadeId
         this.formGroup.controls.cidadeId.setValue(null);
       },
-      error => {});
+        error => { });
   }
 
   signupUser() {
-    console.log(this.formGroup.value)
+
+    this.clienteService.insert(this.formGroup.value)
+      .subscribe(response => {
+        this.showInsertOk();
+      },
+        error => { });
   }
-  
+
+  showInsertOk() {
+    let alert = this.alertCtrl.create({
+      title: 'Sucesso!',
+      message: 'Cadastro efetuado com sucesso',
+      enableBackdropDismiss: false,
+      buttons: [
+        {
+          text: 'Ok',
+          handler: () => {
+            this.navCtrl.pop();
+          }
+        }
+      ]
+    }
+
+    );
+    alert.present();
+  }
+
 
 }
