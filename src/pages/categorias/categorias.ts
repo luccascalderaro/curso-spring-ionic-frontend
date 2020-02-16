@@ -39,5 +39,9 @@ items: CategoriaDTO[];
 
     
   }
+
+  showProdutos(){
+    this.navCtrl.push('ProdutosPage');  
+  }
   
 }
