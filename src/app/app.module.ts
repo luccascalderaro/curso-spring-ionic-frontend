@@ -1,3 +1,4 @@
+import { CartService } from './../services/domain/cart.service';
 import { ProdutoService } from './../services/domain/produto.service';
 import { ClienteService } from './../services/domain/cliente.service';
 import { BrowserModule } from '@angular/platform-browser';
@@ -33,7 +34,7 @@ import { AuthInterceptorProvider } from '../interceptors/auth-interceptor';
     SplashScreen,
     {provide: ErrorHandler, useClass: IonicErrorHandler},
     CategoriaService,AuthInterceptorProvider ,ErrorInterceptorProvider,AuthService,
-    StorageService, ClienteService, ProdutoService
+    StorageService, ClienteService, ProdutoService, CartService
   ]
 })
 export class AppModule {}
