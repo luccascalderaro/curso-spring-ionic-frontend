@@ -15,6 +15,7 @@ import { ErrorInterceptorProvider } from '../interceptors/error-interceptor';
 import { AuthService } from '../services/auth.service';
 import { StorageService } from '../services/storage.service';
 import { AuthInterceptorProvider } from '../interceptors/auth-interceptor';
+import { ImageUtilService } from '../services/image-util.service';
 
 @NgModule({
   declarations: [
@@ -34,7 +35,8 @@ import { AuthInterceptorProvider } from '../interceptors/auth-interceptor';
     SplashScreen,
     {provide: ErrorHandler, useClass: IonicErrorHandler},
     CategoriaService,AuthInterceptorProvider ,ErrorInterceptorProvider,AuthService,
-    StorageService, ClienteService, ProdutoService, CartService
+    StorageService, ClienteService, ProdutoService, CartService,
+    ImageUtilService
   ]
 })
 export class AppModule {}
